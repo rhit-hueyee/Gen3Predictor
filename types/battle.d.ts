@@ -328,6 +328,12 @@ declare namespace Showdown {
     calcdexDestroyed?: boolean;
     nonce?: string;
 
+    gen3ouPredictorRoom?: Showdown.HtmlRoom;
+    gen3ouPredictorReactRoot?: import('react-dom/client').Root;
+    gen3ouPredictorInit?: boolean;
+    gen3ouPredictorDestroyed?: boolean;
+
+
     (options?: {
       $frame?: JQuery<HTMLElement>;
       $logFrame?: JQuery<HTMLElement>;

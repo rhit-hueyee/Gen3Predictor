@@ -1,4 +1,4 @@
-import { CalcdexBootstrapper, HellodexBootstrapper, TeamdexBootstrapper } from '@showdex/pages';
+import { CalcdexBootstrapper, HellodexBootstrapper, TeamdexBootstrapper, Gen3OUPredictorBootstrapper } from '@showdex/pages';
 import { calcdexSlice, createStore, showdexSlice } from '@showdex/redux/store';
 import { bakeBakedexBundles, loadI18nextLocales } from '@showdex/utils/app';
 import { env, nonEmptyObject } from '@showdex/utils/core';
@@ -102,7 +102,8 @@ app.receive = (data: string) => {
     }
 
     // call the Calcdex bootstrapper
-    return void CalcdexBootstrapper(store, data, roomId);
+    void CalcdexBootstrapper(store, data, roomId);
+    void Gen3OUPredictorBootstrapper(store, data, roomId);
   }
 };
 
@@ -143,7 +144,10 @@ void (async () => {
   TeamdexBootstrapper(store);
 
   // process any buffered Calcdex data first before releasing the shitty 'ok' mutex lock
-  bootdexMutex.battleBuf.forEach(([roomId, data]) => void CalcdexBootstrapper(store, data, roomId));
+  bootdexMutex.battleBuf.forEach(([roomId, data]) => {
+    void CalcdexBootstrapper(store, data, roomId);
+    void Gen3OUPredictorBootstrapper(store, data, roomId);
+  });
   bootdexMutex.battleBuf = null; // clear for garbaj collection since the bootdexMutex obj will remain in memory
   bootdexMutex.ok = true;
 })();

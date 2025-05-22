@@ -11,3 +11,5 @@ export * from './openCalcdexInstance';
 export * from './openHellodexInstance';
 export * from './openHonkdexInstance';
 export * from './removeHonkdexInstances';
+export * from './createGen3OUPredictorRoom';
+export * from './getGen3OUPredictorRoomId';
